@@ -74,8 +74,9 @@ class Model():
 
     def predict (self, X):
         price = self.model.predict(X)
-        price = round(price[0], 2)
+        price = float(price[0])
         price = np.expm1(price)
+        price = round(price, 2)
         return price
 
 

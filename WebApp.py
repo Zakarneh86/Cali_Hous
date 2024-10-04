@@ -9,7 +9,7 @@ warnings.filterwarnings('ignore')
 
 #os.system('streamlit run webApp.py')
 
-class webApp():
+class WebApp():
     def __init__(self):
         self.Price = 0.0
         with open('Columns.json', 'r') as file:
@@ -36,11 +36,11 @@ class webApp():
              self.hasPool = st.radio('Pool', options={'Yes': True, 'No':False}, horizontal=True, key=10)
              self.hasSpa = st.radio('Spa', options={'Yes': True, 'No':False}, horizontal=True, key=11)
              self.datePosting = st.date_input('When to Buy', value=None, key=12)
-             self.button = st.button('Predict',on_click=self.predict , key=13)
+             self.button = st.button('Predict', key=13)
+             self.predictedPrice = st.empty()
 
     
-    def predict(self):
-        predictedPrice = st.empty()
+    def fitchData(self):
         homeType = self.homeType
         city = self.City
         level = self.level
@@ -79,19 +79,20 @@ class webApp():
             season = 'spring'
         
         df = pd.DataFrame([[level,home, season, city, yearBuilt, livingArea, bathRooms, bedRooms, parking, garage, pool, spa, age ]],columns=['levels', 'homeType', 'postingSeason', 'city', 'yearBuilt','livingAreaValue', 'bathrooms', 'bedrooms', 'parking', 'hasGarage','pool', 'spa', 'Age'])
-
-        model = ModelDep.Model()
-        model.get_dpnds()
-        X = model.data_encoding(df)
-        Price = model.predict(X)
-        self.Price = Price
-        self.printPrice()
+        return df, True
     
-    def printPrice(self):
-        with self.pageColumns[1]:
-            st.text(f'Predicted Price: {self.Price} USD')
+    def printPrice(self, price):
+        self.predictedPrice.write(f'Predicted Price: {price} USD')
         
 
-web = webApp()
+web = WebApp()
+model = ModelDep.Model()
+model.get_dpnds()
+if web.button:
+    df, dataFitched = web.fitchData()
+    if dataFitched:
+        X = model.data_encoding(df)
+        price = model.predict(X)
+        web.printPrice(price)
 
 

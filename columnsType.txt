@@ -1,0 +1,20 @@
+homeType        DropDownMenue
+levels          DropDownMenue
+yearBuilt       Slide
+Age             Calculated from yearBuilt
+ageCat          Calculated from yearBuilt
+county          From Map
+city            Frop Map
+streetAddress   From Map
+zipcode         From Map
+livingAreaValue Slide
+bathrooms       Slide
+bedrooms        Slide
+parking         Radio
+hasGarage       Radio
+pool            Radio
+spa             Radio
+hasPetsAllowed  Radio
+postingmonth    Calander
+postingSeason   Calculated from posting Month
+

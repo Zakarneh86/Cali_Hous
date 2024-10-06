@@ -15,8 +15,9 @@ homeTypeList = columns["HomeType"]
 
 
 col1, col2 =st.columns([1, 4])
+sidebar = st.sidebar
 
-with col1:
+with sidebar:
     homeType = st.selectbox(label= 'Select Home Type', options=homeTypeList, key=1)
     City = st.selectbox('Select City', options = cityList, key=2)
     level = st.selectbox('Select Number of Stories', options=levelsList, key=3)

@@ -14,7 +14,7 @@ levelsList = columns["Levels"]
 homeTypeList = columns["HomeType"]
 
 
-col1, col2 =st.columns([0.25, .075])
+col1, col2 =st.columns([1, 4])
 
 with col1:
     homeType = st.selectbox(label= 'Select Home Type', options=homeTypeList, key=1)

@@ -30,7 +30,7 @@ with st.container(border=True, height=800):
         st.write(f"**lon:** {lon} **lat**: {lat}")
         # Perform reverse geocoding to get address information
         try:
-            location = gmaps.reverse("{}, {}".format(lat, lon), exactly_one=False, language="en")
+            location = gmaps.reverse(lat, lon)
         except:
             location = None
 

@@ -29,7 +29,7 @@ with st.container(border=True, height=800):
         try:
             location = geolocator.reverse((lon, lat), exactly_one=False, language="en")
         except:
-            pass
+            location = None
 
         if location:
             address = location.address

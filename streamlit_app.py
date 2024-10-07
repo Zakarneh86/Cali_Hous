@@ -23,7 +23,10 @@ if clicked_location and clicked_location['last_clicked']:
     lat = clicked_location['last_clicked']['lat']
     lon = clicked_location['last_clicked']['lng']
      # Perform reverse geocoding to get address information
-    location = geolocator.reverse((lat, lon), exactly_one=True, language="en")
+    try:
+        location = geolocator.reverse((lat, lon), exactly_one=True, language="en")
+    except:
+        pass
 
     if location:
         address = location.address

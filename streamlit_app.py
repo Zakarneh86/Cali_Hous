@@ -21,6 +21,10 @@ with st.container(border=True, height=500):
     latitude, longitude = 37.7749, -122.4194  # San Francisco
     # Create a map centered around the starting point
     m = folium.Map(location=[latitude, longitude], zoom_start=13)
+    out1 = st.empty()
+    out2 = st.empty()
+    out3 = st.empty()
+    out4 = st.empty()
     m.add_child(folium.LatLngPopup())
     map_data = st_folium(m, width=700, height=500)
     # Check if a location was clicked
@@ -29,7 +33,7 @@ with st.container(border=True, height=500):
         clicked_lng = map_data['last_clicked']['lng']
 
         # Display clicked latitude and longitude
-        st.write(f"Clicked Location: Latitude = {clicked_lat}, Longitude = {clicked_lng}")
+        #st.write(f"Clicked Location: Latitude = {clicked_lat}, Longitude = {clicked_lng}")
 
         # Perform reverse geocoding using Google Maps API
         reverse_geocode_result = gmaps.reverse_geocode(clicked_lat, clicked_lng)
@@ -43,22 +47,22 @@ with st.container(border=True, height=500):
             # Extract the city
             city = components.get('city', 'N/A')
             if city:
-                st.write(f"**City:** {city}")
+                out1.write(f"**City:** {city}")
             
             # Extract the county (administrative_area_level_2 equivalent in OpenCage is "county")
             county = components.get('county', 'N/A')
             if county:
-                st.write(f"**County:** {county}")
+                out2.write(f"**County:** {county}")
             
             # Extract the street (equivalent to "road" in OpenCage)
             street = components.get('road', 'N/A')
             if street:
-                st.write(f"**Street:** {street}")
+                out3.write(f"**Street:** {street}")
             
             # Extract the postal code
             postal_code = components.get('postcode', 'N/A')
             if postal_code:
-                st.write(f"**Zip Code:** {postal_code}")
+                out4.write(f"**Zip Code:** {postal_code}")
         else:
             st.write("No address found for the given coordinates.")
     else:

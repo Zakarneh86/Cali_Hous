@@ -40,7 +40,7 @@ if map_data and map_data['last_clicked']:
         st.write(f"**Address:** {address}")
 
         # Extract more detailed information (city, street, zip, etc.)
-        for component in reverse_geocode_result[0]['address_components']:
+        for component in reverse_geocode_result[0]['formatted']:
             if 'locality' in component['types']:  # City
                 city = component['long_name']
                 st.write(f"**City:** {city}")

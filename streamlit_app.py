@@ -36,25 +36,31 @@ if map_data and map_data['last_clicked']:
 
     if reverse_geocode_result:
         # Get formatted address from the first result
-        address = reverse_geocode_result[0]['formatted']
+        address = reverse_geocode_result[0]['components']
         st.write(f"**Address:** {address}")
 
         # Extract more detailed information (city, street, zip, etc.)
-        for component in reverse_geocode_result[0]['formatted']:
-            if 'locality' in component['types']:  # City
-                city = component['long_name']
-                st.write(f"**City:** {city}")
-            if 'administrative_area_level_2' in component['types']:  # County
-                county = component['long_name']
-                st.write(f"**County:** {county}")
-            if 'route' in component['types']:  # Street
-                street = component['long_name']
-                st.write(f"**Street:** {street}")
-            if 'postal_code' in component['types']:  # Zip Code
-                zip_code = component['long_name']
-                st.write(f"**Zip Code:** {zip_code}")
+         # Extract the city
+        city = components.get('city', 'N/A')
+        if city:
+            st.write(f"**City:** {city}")
+        
+        # Extract the county (administrative_area_level_2 equivalent in OpenCage is "county")
+        county = components.get('county', 'N/A')
+        if county:
+            st.write(f"**County:** {county}")
+        
+        # Extract the street (equivalent to "road" in OpenCage)
+        street = components.get('road', 'N/A')
+        if street:
+            st.write(f"**Street:** {street}")
+        
+        # Extract the postal code
+        postal_code = components.get('postcode', 'N/A')
+        if postal_code:
+            st.write(f"**Zip Code:** {postal_code}")
     else:
-        st.write("No address found for this location.")
+        st.write("No address found for the given coordinates.")
 else:
     st.write("Click on the map to get a location.")
 

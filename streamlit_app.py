@@ -61,8 +61,11 @@ with st.container(border=True):
                 
                 # Extract the street (equivalent to "road" in OpenCage)
                 street = components.get('road', 'N/A')
-                if street:
-                    out3.write(f"**Street:** {street}")
+                house = components.get('house_number', 'NA')
+                if street & house:
+                    out3.write(f"**Street Address:**{house} {street}")
+                elif street & ~ house:
+                    out3.write(f"**Street Address:** {street}")    
                 
                 # Extract the postal code
                 postal_code = components.get('postcode', 'N/A')

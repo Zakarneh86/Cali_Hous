@@ -24,6 +24,7 @@ with st.container(border=True, height=800):
     if clicked_location and clicked_location['last_clicked']:
         lat = clicked_location['last_clicked']['lat']
         lon = clicked_location['last_clicked']['lng']
+        st.write(f"**lon:** {lon} **lat: {lat}")
         # Perform reverse geocoding to get address information
         location = None
         try:

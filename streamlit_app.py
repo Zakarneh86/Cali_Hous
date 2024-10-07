@@ -36,7 +36,7 @@ if map_data and map_data['last_clicked']:
 
     if reverse_geocode_result:
         # Get formatted address from the first result
-        address = reverse_geocode_result[0]['formatted_address']
+        address = reverse_geocode_result[0]
         st.write(f"**Address:** {address}")
 
         # Extract more detailed information (city, street, zip, etc.)

@@ -32,7 +32,7 @@ if map_data and map_data['last_clicked']:
     st.write(f"Clicked Location: Latitude = {clicked_lat}, Longitude = {clicked_lng}")
 
     # Perform reverse geocoding using Google Maps API
-    reverse_geocode_result = gmaps.reverse_geocode((clicked_lat, clicked_lng))
+    reverse_geocode_result = gmaps.reverse_geocode(clicked_lat, clicked_lng)
 
     if reverse_geocode_result:
         # Get formatted address from the first result

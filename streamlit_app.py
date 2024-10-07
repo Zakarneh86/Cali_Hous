@@ -11,16 +11,15 @@ from streamlit_folium import st_folium
 from geopy.geocoders import Nominatim
 from opencage.geocoder import OpenCageGeocode
 
+geolocator = Nominatim(user_agent="myGeocoder")
+gmaps = OpenCageGeocode(key ='7b37abbcc56646cc85e561da7e137a8c')
+latitude, longitude = 37.7749, -122.4194  # San Francisco
+
 with st.container(border=True):
-    geolocator = Nominatim(user_agent="myGeocoder")
-
     st.title("Map to Select Location")
-
-    gmaps = OpenCageGeocode(key ='7b37abbcc56646cc85e561da7e137a8c')
-
-    latitude, longitude = 37.7749, -122.4194  # San Francisco
     # Create a map centered around the starting point
-    m = folium.Map(location=[latitude, longitude], zoom_start=13)
+    with st.container(border=True):
+        m = folium.Map(location=[latitude, longitude], zoom_start=13)
     out1 = st.empty()
     out2 = st.empty()
     out3 = st.empty()

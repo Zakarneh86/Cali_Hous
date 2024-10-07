@@ -24,7 +24,7 @@ with st.sidebar:
         bathRooms = st.slider('How Many Bathrooms', min_value=1, max_value=15, key=7)
 
     with st.container():  # container2
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3, col4, col5 = st.columns(5)
         with col1:
             hasParking = st.radio('Parking', options=['Yes', 'No'], horizontal=True, key=8)
         with col2:
@@ -33,6 +33,8 @@ with st.sidebar:
             hasPool = st.radio('Pool', options=['Yes', 'No'], horizontal=True, key=10)
         with col4:
             hasSpa = st.radio('Spa', options=['Yes', 'No'], horizontal=True, key=11)
+        with col5:
+            hasPetsAllowed= st.radio('Pets', options=['Yes', 'No'], horizontal=True, key=14)
 
     with st.container():  # container3
         datePosting = st.date_input('When to Buy', value=None, key=12)

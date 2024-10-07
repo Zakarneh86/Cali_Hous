@@ -9,11 +9,14 @@ warnings.filterwarnings('ignore')
 import folium
 from streamlit_folium import st_folium
 from geopy.geocoders import Nominatim
+import googlemaps
 
 with st.container(border=True, height=800):
     geolocator = Nominatim(user_agent="myGeocoder")
 
     st.title("Map to Select Location")
+
+    gmaps = googlemaps.Client(key ='AIzaSyBcCiJ1cZaPWUOxZPQwNA3onKGRcKe_mMY')
 
     latitude, longitude = 37.7749, -122.4194  # San Francisco
     # Create a map centered around the starting point
@@ -27,7 +30,7 @@ with st.container(border=True, height=800):
         st.write(f"**lon:** {lon} **lat**: {lat}")
         # Perform reverse geocoding to get address information
         try:
-            location = geolocator.reverse("{}, {}".format(lat, lon), exactly_one=False, language="en")
+            location = gmaps.reverse("{}, {}".format(lat, lon), exactly_one=False, language="en")
         except:
             location = None
 

@@ -22,36 +22,41 @@ with st.container(border=True, height=800):
     # Create a map centered around the starting point
     m = folium.Map(location=[latitude, longitude], zoom_start=13)
     m.add_child(folium.LatLngPopup())
-    clicked_location = st_folium(m, width=700, height=500)
+    map_data = st_folium(m, width=700, height=500)
     # Check if a location was clicked
-    if clicked_location and clicked_location['last_clicked']:
-        lat = clicked_location['last_clicked']['lat']
-        lon = clicked_location['last_clicked']['lng']
-        st.write(f"**lon:** {lon} **lat**: {lat}")
-        # Perform reverse geocoding to get address information
-        try:
-            location = gmaps.reverse(lat, lon)
-        except:
-            location = None
+if map_data and map_data['last_clicked']:
+    clicked_lat = map_data['last_clicked']['lat']
+    clicked_lng = map_data['last_clicked']['lng']
 
-        if location:
-            address = location.address
-            st.write(f"**Address:** {address}")
+    # Display clicked latitude and longitude
+    st.write(f"Clicked Location: Latitude = {clicked_lat}, Longitude = {clicked_lng}")
 
-            # Extract details from the address
-            address_details = location.raw['address']
-            
-            city = address_details.get('city', '')
-            county = address_details.get('county', '')
-            street = address_details.get('road', '')
-            zip_code = address_details.get('postcode', '')
+    # Perform reverse geocoding using Google Maps API
+    reverse_geocode_result = gmaps.reverse_geocode((clicked_lat, clicked_lng))
 
-            st.write(f"**City:** {city}")
-            st.write(f"**County:** {county}")
-            st.write(f"**Street:** {street}")
-            st.write(f"**Zip Code:** {zip_code}")
-        else:
-            st.write("No address found for this location.")
+    if reverse_geocode_result:
+        # Get formatted address from the first result
+        address = reverse_geocode_result[0]['formatted_address']
+        st.write(f"**Address:** {address}")
+
+        # Extract more detailed information (city, street, zip, etc.)
+        for component in reverse_geocode_result[0]['address_components']:
+            if 'locality' in component['types']:  # City
+                city = component['long_name']
+                st.write(f"**City:** {city}")
+            if 'administrative_area_level_2' in component['types']:  # County
+                county = component['long_name']
+                st.write(f"**County:** {county}")
+            if 'route' in component['types']:  # Street
+                street = component['long_name']
+                st.write(f"**Street:** {street}")
+            if 'postal_code' in component['types']:  # Zip Code
+                zip_code = component['long_name']
+                st.write(f"**Zip Code:** {zip_code}")
+    else:
+        st.write("No address found for this location.")
+else:
+    st.write("Click on the map to get a location.")
 
 
 with open('Columns.json', 'r') as file:

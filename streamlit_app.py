@@ -27,7 +27,7 @@ with st.container(border=True, height=800):
         st.write(f"**lon:** {lon} **lat**: {lat}")
         # Perform reverse geocoding to get address information
         try:
-            location = geolocator.reverse((lon, lat), exactly_one=False, language="en")
+            location = geolocator.reverse("{}, {}".format(lat, lon), exactly_one=False, language="en")
         except:
             location = None
 

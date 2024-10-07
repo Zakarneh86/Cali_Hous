@@ -37,7 +37,7 @@ with st.sidebar:
             hasPetsAllowed= st.radio('Pets', options=['Yes', 'No'], horizontal=True, key=14)
 
     with st.container():  # container3
-        datePosting = st.date_input('When to Buy', value=None, key=12)
+        datePosting = st.date_input('When to Buy', value=datetime.datetime.now(), key=12)
         button = st.button('Predict', key=13)
 
 

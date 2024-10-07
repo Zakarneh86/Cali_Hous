@@ -19,10 +19,14 @@ with st.container(border=True):
     st.title("Map to Select Location")
     # Create a map centered around the starting point
     with st.container(border=True):
-        out1 = st.write(f"**City:**")
-        out2 = st.write(f"**County:**")
-        out3 = st.write(f"**Street:**")
-        out4 = st.write(f"**Zip Code:**")
+        out1 = st.empty()
+        out2 = st.empty()
+        out3 = st.empty()
+        out4 = st.empty()
+        out1.write(f"**City:**")
+        out2.write(f"**County:**")
+        out3.write(f"**Street:**")
+        out4.write(f"**Zip Code:**")
     with st.container(border=True):
         m = folium.Map(location=[latitude, longitude], zoom_start=13)
         m.add_child(folium.LatLngPopup())

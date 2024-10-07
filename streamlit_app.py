@@ -16,7 +16,6 @@ homeTypeList = columns["HomeType"]
 with st.sidebar:
     with st.container():  # container1
         homeType = st.selectbox(label='Select Home Type', options=homeTypeList, key=1)
-        City = st.selectbox('Select City', options=cityList, key=2)
         level = st.selectbox('Select Number of Stories', options=levelsList, key=3)
         yearBuilt = st.select_slider('Select Year Built', options=range(1850, (datetime.datetime.now().year + 1)), key=4)
         livingArea = st.slider('Select Level Area', min_value=100, max_value=6000, step=10, key=5)

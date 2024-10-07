@@ -6,6 +6,44 @@ import datetime
 import pandas as pd
 import warnings
 warnings.filterwarnings('ignore')
+import folium
+from streamlit_folium import st_folium
+from geopy.geocoders import Nominatim
+
+geolocator = Nominatim(user_agent="myGeocoder")
+
+st.title("Map to Select Location")
+
+latitude, longitude = 37.7749, -122.4194  # San Francisco
+# Create a map centered around the starting point
+m = folium.Map(location=[latitude, longitude], zoom_start=13)
+clicked_location = st_folium(m, width=700, height=500)
+# Check if a location was clicked
+if clicked_location and clicked_location['last_clicked']:
+    lat = clicked_location['last_clicked']['lat']
+    lon = clicked_location['last_clicked']['lng']
+     # Perform reverse geocoding to get address information
+    location = geolocator.reverse((lat, lon), exactly_one=True, language="en")
+
+    if location:
+        address = location.address
+        st.write(f"**Address:** {address}")
+
+        # Extract details from the address
+        address_details = location.raw['address']
+        
+        city = address_details.get('city', '')
+        county = address_details.get('county', '')
+        street = address_details.get('road', '')
+        zip_code = address_details.get('postcode', '')
+
+        st.write(f"**City:** {city}")
+        st.write(f"**County:** {county}")
+        st.write(f"**Street:** {street}")
+        st.write(f"**Zip Code:** {zip_code}")
+    else:
+        st.write("No address found for this location.")
+
 
 with open('Columns.json', 'r') as file:
             columns = json.load(file)

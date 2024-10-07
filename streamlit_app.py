@@ -19,7 +19,7 @@ with st.container(border=True, height=800):
     # Create a map centered around the starting point
     m = folium.Map(location=[latitude, longitude], zoom_start=13)
     m.add_child(folium.LatLngPopup())
-    clicked_location = st_folium(m, width=100, height=70)
+    clicked_location = st_folium(m, width=700, height=500)
     # Check if a location was clicked
     if clicked_location and clicked_location['last_clicked']:
         lat = clicked_location['last_clicked']['lat']

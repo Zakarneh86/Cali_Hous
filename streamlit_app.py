@@ -64,7 +64,7 @@ with st.container(border=True):
                 house = components.get('house_number', 'NA')
                 if street & house:
                     out3.write(f"**Street Address:**{house} {street}")
-                elif street & ~ house:
+                elif street and ~ house:
                     out3.write(f"**Street Address:** {street}")    
                 
                 # Extract the postal code

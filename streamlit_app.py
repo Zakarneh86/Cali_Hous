@@ -16,7 +16,7 @@ with st.container(border=True, height=800):
 
     st.title("Map to Select Location")
 
-    gmaps = OpenCageGeocode.Client(key ='7b37abbcc56646cc85e561da7e137a8c')
+    gmaps = OpenCageGeocode(key ='7b37abbcc56646cc85e561da7e137a8c')
 
     latitude, longitude = 37.7749, -122.4194  # San Francisco
     # Create a map centered around the starting point

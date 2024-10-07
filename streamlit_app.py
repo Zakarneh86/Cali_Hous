@@ -10,7 +10,7 @@ import folium
 from streamlit_folium import st_folium
 from geopy.geocoders import Nominatim
 
-with st.container():
+with st.container(border=True, height=120):
     geolocator = Nominatim(user_agent="myGeocoder")
 
     st.title("Map to Select Location")

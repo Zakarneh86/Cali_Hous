@@ -63,7 +63,7 @@ with st.container(border=True):
                 street = components.get('road', 'N/A')
                 house = components.get('house_number', 'N/A')
                 if street !='N/A' and house !='N/A':
-                    out3.write(f"**Street Address:**{house} {street}")
+                    out3.write(f"**Street Address:** {house} {street}")
                 elif street !='N/A' and house =='N/A':
                     out3.write(f"**Street Address:** {street}")    
                 

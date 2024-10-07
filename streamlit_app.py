@@ -24,45 +24,45 @@ with st.container(border=True, height=800):
     m.add_child(folium.LatLngPopup())
     map_data = st_folium(m, width=700, height=500)
     # Check if a location was clicked
-if map_data and map_data['last_clicked']:
-    clicked_lat = map_data['last_clicked']['lat']
-    clicked_lng = map_data['last_clicked']['lng']
+    if map_data and map_data['last_clicked']:
+        clicked_lat = map_data['last_clicked']['lat']
+        clicked_lng = map_data['last_clicked']['lng']
 
-    # Display clicked latitude and longitude
-    st.write(f"Clicked Location: Latitude = {clicked_lat}, Longitude = {clicked_lng}")
+        # Display clicked latitude and longitude
+        st.write(f"Clicked Location: Latitude = {clicked_lat}, Longitude = {clicked_lng}")
 
-    # Perform reverse geocoding using Google Maps API
-    reverse_geocode_result = gmaps.reverse_geocode(clicked_lat, clicked_lng)
+        # Perform reverse geocoding using Google Maps API
+        reverse_geocode_result = gmaps.reverse_geocode(clicked_lat, clicked_lng)
 
-    if reverse_geocode_result:
-        # Get formatted address from the first result
-        components = reverse_geocode_result[0]['components']
-        #st.write(f"**Address:** {components}")
+        if reverse_geocode_result:
+            # Get formatted address from the first result
+            components = reverse_geocode_result[0]['components']
+            #st.write(f"**Address:** {components}")
 
-        # Extract more detailed information (city, street, zip, etc.)
-         # Extract the city
-        city = components.get('city', 'N/A')
-        if city:
-            st.write(f"**City:** {city}")
-        
-        # Extract the county (administrative_area_level_2 equivalent in OpenCage is "county")
-        county = components.get('county', 'N/A')
-        if county:
-            st.write(f"**County:** {county}")
-        
-        # Extract the street (equivalent to "road" in OpenCage)
-        street = components.get('road', 'N/A')
-        if street:
-            st.write(f"**Street:** {street}")
-        
-        # Extract the postal code
-        postal_code = components.get('postcode', 'N/A')
-        if postal_code:
-            st.write(f"**Zip Code:** {postal_code}")
+            # Extract more detailed information (city, street, zip, etc.)
+            # Extract the city
+            city = components.get('city', 'N/A')
+            if city:
+                st.write(f"**City:** {city}")
+            
+            # Extract the county (administrative_area_level_2 equivalent in OpenCage is "county")
+            county = components.get('county', 'N/A')
+            if county:
+                st.write(f"**County:** {county}")
+            
+            # Extract the street (equivalent to "road" in OpenCage)
+            street = components.get('road', 'N/A')
+            if street:
+                st.write(f"**Street:** {street}")
+            
+            # Extract the postal code
+            postal_code = components.get('postcode', 'N/A')
+            if postal_code:
+                st.write(f"**Zip Code:** {postal_code}")
+        else:
+            st.write("No address found for the given coordinates.")
     else:
-        st.write("No address found for the given coordinates.")
-else:
-    st.write("Click on the map to get a location.")
+        st.write("Click on the map to get a location.")
 
 
 with open('Columns.json', 'r') as file:

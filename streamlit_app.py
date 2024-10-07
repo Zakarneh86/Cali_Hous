@@ -11,7 +11,7 @@ from streamlit_folium import st_folium
 from geopy.geocoders import Nominatim
 from opencage.geocoder import OpenCageGeocode
 
-with st.container(border=True, height=500):
+with st.container(border=True):
     geolocator = Nominatim(user_agent="myGeocoder")
 
     st.title("Map to Select Location")

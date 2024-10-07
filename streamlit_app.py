@@ -9,14 +9,14 @@ warnings.filterwarnings('ignore')
 import folium
 from streamlit_folium import st_folium
 from geopy.geocoders import Nominatim
-import googlemaps
+from opencage.geocoder import OpenCageGeocode
 
 with st.container(border=True, height=800):
     geolocator = Nominatim(user_agent="myGeocoder")
 
     st.title("Map to Select Location")
 
-    gmaps = googlemaps.Client(key ='AIzaSyBcCiJ1cZaPWUOxZPQwNA3onKGRcKe_mMY')
+    gmaps = OpenCageGeocode.Client(key ='7b37abbcc56646cc85e561da7e137a8c')
 
     latitude, longitude = 37.7749, -122.4194  # San Francisco
     # Create a map centered around the starting point

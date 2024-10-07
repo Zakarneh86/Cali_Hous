@@ -4,5 +4,4 @@ xgboost
 scikit-learn
 folium
 streamlit_folium
-geopy
-googlemaps
+opencage

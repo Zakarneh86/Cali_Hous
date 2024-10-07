@@ -11,12 +11,13 @@ from streamlit_folium import st_folium
 from geopy.geocoders import Nominatim
 from opencage.geocoder import OpenCageGeocode
 
+st.title('California Housing Price Evaluation')
 geolocator = Nominatim(user_agent="myGeocoder")
 gmaps = OpenCageGeocode(key ='7b37abbcc56646cc85e561da7e137a8c')
 latitude, longitude = 37.7749, -122.4194  # San Francisco
 
 with st.container(border=True):
-    st.title("Map to Select Location")
+    st.title("Select Location")
     # Create a map centered around the starting point
     with st.container(border=True):
         out1 = st.empty()

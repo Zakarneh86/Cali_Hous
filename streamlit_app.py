@@ -18,7 +18,7 @@ with st.container(border=True, height=800):
     latitude, longitude = 37.7749, -122.4194  # San Francisco
     # Create a map centered around the starting point
     m = folium.Map(location=[latitude, longitude], zoom_start=13)
-    clicked_location = st_folium(m, width=700, height=500)
+    clicked_location = st_folium(m, width=100, height=70)
     # Check if a location was clicked
     if clicked_location and clicked_location['last_clicked']:
         lat = clicked_location['last_clicked']['lat']

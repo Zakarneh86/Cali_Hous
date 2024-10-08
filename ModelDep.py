@@ -16,7 +16,7 @@ import time
 class Model():
     def __init__(self):
         self.wd = os.path.dirname(os.path.abspath(__file__))
-        file_list ={'XGBoost Model':'XGBoost.pkl' , 'City Label Encoder':'LECity.pkl','One Hot Encoder': 'oheCT04.pkl'}
+        file_list ={'XGBoost Model':'XGBoost.pkl' , 'City Label Encoder':'LECity.pkl', 'County Label Encoder':'LECounty.pkl', 'One Hot Encoder':'oheCT04.pkl'}
         dpnds_path = 'dpnds'
         dpnds_path = os.path.join(self.wd,'dpnds')
         fileMissing = False
@@ -46,6 +46,8 @@ class Model():
                 cityLEFile = os.path.join(dpnds_path,i)
             elif i == 'oheCT04.pkl':
                 oheCTFile = os.path.join(dpnds_path,i)
+            elif i == 'LECounty.pkl':
+                countyLEFile = os.path.join(dpnds_path,i)
 
         try:
             self.model = joblib.load(modelFile)
@@ -62,10 +64,23 @@ class Model():
         except Exception as e:
             print ('Error Downloading One Hot Encoder: ', e)
             sys.exit(-1)
+        try:
+            self.countyLE = joblib.load(countyLEFile)
+        except Exception as e:
+            print ('Error Downloading City Label Encoder: ', e)
+            sys.exit(-1)
 
 
     def data_encoding(self, df):
-        df['city'] = self.cityLE.transform(df['city'])
+        try:
+            df['city'] = self.cityLE.transform(df['city'])
+        except:
+            df['city'] = 0
+        try:
+            df['county']= self.countyLE.transform(df['county'])
+        except:
+            df['county']= 0
+            
         #print(df.head(1))
         X = df.iloc[:,:]
         #print (X[:,:])

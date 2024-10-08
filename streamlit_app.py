@@ -164,5 +164,6 @@ with st.sidebar:
 
 if button:
     predicted.write('Pressed')
+    button = False
 
 #model = ModelDep.Model()

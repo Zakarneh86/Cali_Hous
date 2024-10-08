@@ -83,6 +83,9 @@ cityList = columns["City"]
 levelsList = columns["Levels"]
 homeTypeList = columns["HomeType"]
 
+
+
+
 with st.sidebar:
     with st.container():  # container1
         homeType = st.selectbox(label='Select Home Type', options=homeTypeList, key=1)
@@ -107,4 +110,10 @@ with st.sidebar:
 
     with st.container():  # container3
         datePosting = st.date_input('When to Buy', value=datetime.datetime.now(), key=12)
-        button = st.button('Predict', key=13)
+        button = st.button('Predict', on_click=predict(), key=13)
+        predicted = st.empty()
+
+def predict():
+    predicted.write(0)
+
+model = ModelDep.Model()

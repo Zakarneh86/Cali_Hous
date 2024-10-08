@@ -10,6 +10,7 @@ import folium
 from streamlit_folium import st_folium
 from geopy.geocoders import Nominatim
 from opencage.geocoder import OpenCageGeocode
+import time
 
 st.title('California Housing Price Evaluation')
 geolocator = Nominatim(user_agent="myGeocoder")
@@ -164,6 +165,7 @@ with st.sidebar:
 
 if button:
     predicted.write(f'Pressed {button}')
+    time.sleep(5)
     button = False
 predicted.write(f'Pressed {button}')
 

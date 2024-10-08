@@ -12,6 +12,58 @@ from geopy.geocoders import Nominatim
 from opencage.geocoder import OpenCageGeocode
 import time
 
+def dataPrep(homeType, level, yearBuilt, county, city, postal_code, livingArea, bedrooms, bathrooms, hasParking, hasGarage, hasPool, hasSpa, datePosting):
+    
+    #HomeType
+    if homeType == 'Single Family':
+            home = 'SINGLE_FAMILY'
+    elif homeType == 'Condo':
+        home = 'CONDO'
+    elif homeType == 'Townhouse':
+        home = 'TOWNHOUSE'
+    
+    # Boolean Data (Parking, Garage, Pool, Spa & Pets)
+    parking = 1 if hasParking == 'Yes' else 0
+    garage = 1 if hasGarage == 'Yes' else 0
+    pool = 1 if hasPool == 'Yes' else 0
+    spa = 1 if hasSpa == 'Yes' else 0
+
+    # Age and Age Category
+    age = datetime.datetime.now().year - yearBuilt
+    if age <= 5:
+        ageCat = 'N'
+    elif 6 <= age <= 20:
+        ageCat = 'RN'
+    elif 21 <= age <= 50:
+        ageCat = 'MA'
+    elif 51 <= age <= 100:
+        ageCat = 'O'
+    else:
+        ageCat = 'VO'
+    
+    #Posting Season
+    month = datePosting.month
+    if month in [6,7,8]:
+        season = 'summer'
+    elif month in [9,10,11]:
+        season = 'fall'
+    elif month in [12,1,2]:
+        season = 'winter'
+    elif month in [3,4,5]:
+        season = 'spring'
+    
+    #Postal Code
+    try:
+        postal_code = int(postal_code)
+    except:
+        postal_code = 0
+    
+    df = pd.DataFrame({'home': home, 'levels':level, 'ageCat':ageCat, 'postingSeason':season, 'county':county, 'city':city, 'zipcode':postal_code, 'livingArea':livingArea,
+                       'bathrooms': bathrooms, 'bedrooms':bedrooms, 'parking': parking, 'hasGarage': garage, 'pool':pool, 'spa':spa, 'age': age})
+
+    return df, True
+
+
 st.title('California Housing Price Evaluation')
 geolocator = Nominatim(user_agent="myGeocoder")
 gmaps = OpenCageGeocode(key ='7b37abbcc56646cc85e561da7e137a8c')
@@ -84,58 +136,6 @@ cityList = columns["City"]
 levelsList = columns["Levels"]
 homeTypeList = columns["HomeType"]
 
-def dataPrep(homeType, level, yearBuilt, county, city, postal_code, livingArea, bedrooms, bathrooms, hasParking, hasGarage, hasPool, hasSpa, datePosting):
-    
-    #HomeType
-    if homeType == 'Single Family':
-            home = 'SINGLE_FAMILY'
-    elif homeType == 'Condo':
-        home = 'CONDO'
-    elif homeType == 'Townhouse':
-        home = 'TOWNHOUSE'
-    
-    # Boolean Data (Parking, Garage, Pool, Spa & Pets)
-    parking = 1 if hasParking == 'Yes' else 0
-    garage = 1 if hasGarage == 'Yes' else 0
-    pool = 1 if hasPool == 'Yes' else 0
-    spa = 1 if hasSpa == 'Yes' else 0
-
-    # Age and Age Category
-    age = datetime.datetime.now().year - yearBuilt
-    if age <= 5:
-        ageCat = 'N'
-    elif 6 <= age <= 20:
-        ageCat = 'RN'
-    elif 21 <= age <= 50:
-        ageCat = 'MA'
-    elif 51 <= age <= 100:
-        ageCat = 'O'
-    else:
-        ageCat = 'VO'
-    
-    #Posting Season
-    month = datePosting.month
-    if month in [6,7,8]:
-        season = 'summer'
-    elif month in [9,10,11]:
-        season = 'fall'
-    elif month in [12,1,2]:
-        season = 'winter'
-    elif month in [3,4,5]:
-        season = 'spring'
-    
-    #Postal Code
-    try:
-        postal_code = int(postal_code)
-    except:
-        postal_code = 0
-    
-    df = pd.DataFrame({'home': home, 'levels':level, 'ageCat':ageCat, 'postingSeason':season, 'county':county, 'city':city, 'zipcode':postal_code, 'livingArea':livingArea,
-                       'bathrooms': bathrooms, 'bedrooms':bedrooms, 'parking': parking, 'hasGarage': garage, 'pool':pool, 'spa':spa, 'age': age})
-
-    return df, True
-
-
 with st.sidebar:
     with st.container():  # container1
         homeType = st.selectbox(label='Select Home Type', options=homeTypeList, key=1)
@@ -164,6 +164,8 @@ with st.sidebar:
         predicted = st.empty()
 
 model = ModelDep.Model()
+dataReady = False
+dataEncoded = False
 
 #Fitch Data from Web Page
 if button:

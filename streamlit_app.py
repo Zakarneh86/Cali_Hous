@@ -58,8 +58,8 @@ def dataPrep(homeType, level, yearBuilt, county, city, postal_code, livingArea, 
     except:
         postal_code = 0
     
-    df = pd.DataFrame({'home': home, 'levels':level, 'ageCat':ageCat, 'postingSeason':season, 'county':county, 'city':city, 'zipcode':postal_code, 'livingArea':livingArea,
-                       'bathrooms': bathrooms, 'bedrooms':bedrooms, 'parking': parking, 'hasGarage': garage, 'pool':pool, 'spa':spa, 'age': age})
+    df = pd.DataFrame([[home, level, ageCat, season, county, city, postal_code, livingArea, bathrooms, bedrooms, parking, garage, pool, spa, age]],
+                      columns = ['home', 'levels', 'ageCat', 'postingSeason', 'county', 'city', 'zipcode', 'livingArea','bathrooms', 'bedrooms', 'parking', 'hasGarage', 'pool', 'spa', 'age'] )
 
     return df, True
 
@@ -132,7 +132,6 @@ with st.container(border=True):
 
 with open('Columns.json', 'r') as file:
             columns = json.load(file)
-cityList = columns["City"]
 levelsList = columns["Levels"]
 homeTypeList = columns["HomeType"]
 
@@ -181,10 +180,3 @@ if dataReady:
 if dataEncoded:
     price = model.predict(X)
     predicted.write(f'Predicted Price is: {price}')
-
-
-
-
-
-
-#model = ModelDep.Model()

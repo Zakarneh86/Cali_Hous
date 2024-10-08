@@ -172,6 +172,7 @@ if button:
 
 #Encode Data
 if dataReady:
+    model.get_dpnds()
     X, dataEncoded = model.data_encoding(df)
     dataReady = False
     button = False

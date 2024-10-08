@@ -163,8 +163,8 @@ with st.sidebar:
         predicted = st.empty()
 
 if button:
-    predicted.write('Pressed', button)
+    predicted.write(f'Pressed {button}')
     button = False
-predicted.write('Pressed', button)
+predicted.write(f'Pressed {button}')
 
 #model = ModelDep.Model()

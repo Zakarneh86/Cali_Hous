@@ -59,7 +59,8 @@ def dataPrep(homeType, level, yearBuilt, county, city, postal_code, livingArea, 
         postal_code = 0
     
     df = pd.DataFrame([[home, level, ageCat, season, county, city, postal_code, livingArea, bathrooms, bedrooms, parking, garage, pool, spa, age]],
-                      columns = ['home', 'levels', 'ageCat', 'postingSeason', 'county', 'city', 'zipcode', 'livingArea','bathrooms', 'bedrooms', 'parking', 'hasGarage', 'pool', 'spa', 'age'] )
+                      columns = ['homeType', 'levels', 'ageCat', 'postingSeason', 'county', 'city', 'zipcode', 'livingAreaValue','bathrooms', 'bedrooms',
+                                  'parking', 'hasGarage', 'pool', 'spa', 'Age'] )
 
     return df, True
 

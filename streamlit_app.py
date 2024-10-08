@@ -100,7 +100,7 @@ with st.container(border=True):
             if reverse_geocode_result:
                 # Get formatted address from the first result
                 components = reverse_geocode_result[0]['components']
-                st.write(f"**Address:** {components}")
+                #st.write(f"**Address:** {components}")
 
                 # Extract more detailed information (city, street, zip, etc.)
                 # Extract the city

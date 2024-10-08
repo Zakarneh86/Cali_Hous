@@ -163,10 +163,26 @@ with st.sidebar:
         button = st.button('Predict', key=13)
         predicted = st.empty()
 
+model = ModelDep.Model()
+
+#Fitch Data from Web Page
 if button:
-    predicted.write(f'Pressed {button}')
-    time.sleep(5)
+    df, dataReady = dataPrep(homeType, level, yearBuilt, county, city, postal_code, livingArea, bedRooms, bathRooms, hasParking, hasGarage, hasPool, hasSpa, datePosting)
+
+#Encode Data
+if dataReady:
+    X, dataEncoded = model.data_encoding(df)
+    dataReady = False
     button = False
-predicted.write(f'Pressed {button}')
+
+#Predict Price
+if dataEncoded:
+    price = model.predict(X)
+    predicted.write(f'Predicted Price is: {price}')
+
+
+
+
+
 
 #model = ModelDep.Model()

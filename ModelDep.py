@@ -75,17 +75,17 @@ class Model():
         try:
             df['city'] = self.cityLE.transform(df['city'])
         except:
-            df['city'] = 0
+            df['city'] = -1
         try:
             df['county']= self.countyLE.transform(df['county'])
         except:
-            df['county']= 0
-            
+            df['county']= -1
+
         #print(df.head(1))
         X = df.iloc[:,:]
         #print (X[:,:])
         X = self.oheCT.transform(X)
-        return X
+        return X, True
 
     def predict (self, X):
         price = self.model.predict(X)

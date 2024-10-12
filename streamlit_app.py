@@ -86,11 +86,11 @@ with st.container(border=True):
     # Create a map centered around the starting point
     with st.container(border=True):
         out1 = st.empty()
-        out2 = st.empty()
+        #out2 = st.empty()
         out3 = st.empty()
         out4 = st.empty()
         out1.write(f"**City:**")
-        out2.write(f"**County:**")
+        #out2.write(f"**County:**")
         out3.write(f"**Street:**")
         out4.write(f"**Zip Code:**")
     with st.container(border=True):
@@ -121,8 +121,8 @@ with st.container(border=True):
                 
                 # Extract the county (administrative_area_level_2 equivalent in OpenCage is "county")
                 county = components.get('county', 'N/A')
-                if county:
-                    out2.write(f"**County:** {county}")
+                '''if county:
+                    out2.write(f"**County:** {county}")'''
                 
                 # Extract the street (equivalent to "road" in OpenCage)
                 street = components.get('road', 'N/A')

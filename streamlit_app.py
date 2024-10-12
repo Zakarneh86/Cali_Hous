@@ -66,6 +66,13 @@ def dataPrep(homeType, level, yearBuilt, county, city, postal_code, livingArea, 
 
 
 st.title('California Housing Price Evaluation')
+hide_st_style = '''
+<style>
+#MainMenue {visibility: hidden;}
+footer {visibility: hidden;}
+</style>
+'''
+st.markdown(hide_st_style, unsafe_allow_html= True)
 geolocator = Nominatim(user_agent="myGeocoder")
 gmaps = OpenCageGeocode(key ='7b37abbcc56646cc85e561da7e137a8c')
 latitude, longitude = 37.7749, -122.4194  # San Francisco

@@ -150,7 +150,7 @@ with st.sidebar:
         homeType = st.selectbox(label='Select Home Type', options=homeTypeList, key=1)
         level = st.selectbox('Select Number of Stories', options=levelsList, key=3)
         yearBuilt = st.select_slider('Select Year Built', options=range(1850, (datetime.datetime.now().year + 1)), key=4)
-        livingArea = st.slider('Select Level Area', min_value=100, max_value=6000, step=10, key=5)
+        livingArea = st.slider('Select Living Area', min_value=100, max_value=6000, step=10, key=5)
         bedRooms = st.slider('How Many Bedrooms', min_value=1, max_value=15, key=6)
         bathRooms = st.slider('How Many Bathrooms', min_value=1, max_value=15, key=7)
 

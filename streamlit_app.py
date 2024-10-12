@@ -105,8 +105,8 @@ with st.container(border=True):
                 # Extract more detailed information (city, street, zip, etc.)
                 # Extract the city
                 city = components.get('city', 'N/A')
-                #if city:
-                out1.write(f"**City:** {city}")
+                if city!='N/A':
+                    out1.write(f"**City:** {city}")
                 
                 # Extract the county (administrative_area_level_2 equivalent in OpenCage is "county")
                 county = components.get('county', 'N/A')

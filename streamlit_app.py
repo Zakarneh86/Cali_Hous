@@ -70,6 +70,7 @@ hide_st_style = '''
 <style>
 #MainMenue {visibility: hidden;}
 footer {visibility: hidden;}
+#GithubIcon {visibility: hidden;}
 </style>
 '''
 st.markdown(hide_st_style, unsafe_allow_html= True)

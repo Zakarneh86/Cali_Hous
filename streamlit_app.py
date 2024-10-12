@@ -138,8 +138,6 @@ with st.container(border=True):
                     out4.write(f"**Zip Code:** {postal_code}")
             else:
                 st.write("No address found for the given coordinates.")
-        else:
-            st.write("Click on the map to get a location.")
 
 
 with open('Columns.json', 'r') as file:

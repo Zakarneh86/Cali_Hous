@@ -84,7 +84,7 @@ latitude, longitude = 37.7749, -122.4194  # San Francisco
 with st.container(border=True):
     st.title("Select Location")
     # Create a map centered around the starting point
-    with st.container(border=True):
+    with st.container(border=True, height =700 ):
         out1 = st.empty()
         #out2 = st.empty()
         out3 = st.empty()

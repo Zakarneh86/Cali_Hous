@@ -93,7 +93,7 @@ with st.container(border=True):
         #out2.write(f"**County:**")
         out3.write(f"**Street:**")
         out4.write(f"**Zip Code:**")
-    with st.container(border=True, height =600 ):
+    with st.container(border=True, height =410 ):
         m = folium.Map(location=[latitude, longitude], zoom_start=13)
         m.add_child(folium.LatLngPopup())
         map_data = st_folium(m, width=1000, height=400)

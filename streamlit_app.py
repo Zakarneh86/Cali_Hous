@@ -12,6 +12,8 @@ from geopy.geocoders import Nominatim
 from opencage.geocoder import OpenCageGeocode
 import time
 
+apiKeys = st.secrets["API_Keys"]
+
 def dataPrep(homeType, level, yearBuilt, county, city, postal_code, livingArea, bedrooms, bathrooms, hasParking, hasGarage, hasPool, hasSpa, datePosting):
     
     #HomeType
@@ -97,7 +99,7 @@ with st.container(border=True):
     with st.container(border=True, height =410):
         map_data =[]
         try:
-            geoAPIKey = st.secrets(["openGateAPIKey"])
+            geoAPIKey = apiKeys["openGate "]
             gmaps = OpenCageGeocode(key =geoAPIKey)
             m = folium.Map(location=[latitude, longitude], zoom_start=13)
             m.add_child(folium.LatLngPopup())

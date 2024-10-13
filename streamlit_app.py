@@ -99,7 +99,7 @@ with st.container(border=True):
     with st.container(border=True, height =410):
         map_data =[]
         try:
-            geoAPIKey = apiKeys["openGate "]
+            geoAPIKey = apiKeys["openGate"]
             gmaps = OpenCageGeocode(key =geoAPIKey)
             m = folium.Map(location=[latitude, longitude], zoom_start=13)
             m.add_child(folium.LatLngPopup())

@@ -102,7 +102,8 @@ with st.container(border=True):
             m = folium.Map(location=[latitude, longitude], zoom_start=13)
             m.add_child(folium.LatLngPopup())
             map_data = st_folium(m, width=700, height=400)
-        except:
+        except Exception as e:
+            print (e)
             st.write('Error Connecting to Map Provider')
         
         # Check if a location was clicked

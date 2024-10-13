@@ -79,15 +79,6 @@ st.markdown(hide_st_style, unsafe_allow_html= True)
 
 geolocator = Nominatim(user_agent="myGeocoder")
 
-try:
-    geoAPIKey = st.secrets(["openGateAPIKey "])
-except:
-    st.write('Error Connecting to Map Provider')
-try:
-    gmaps = OpenCageGeocode(key =geoAPIKey)
-except:
-    st.write('Error Connecting to Map Provider')
-
 latitude, longitude = 37.7749, -122.4194  # San Francisco
 
 with st.container(border=True):
@@ -102,10 +93,17 @@ with st.container(border=True):
         #out2.write(f"**County:**")
         out3.write(f"**Street:**")
         out4.write(f"**Zip Code:**")
+    
     with st.container(border=True, height =410 ):
-        m = folium.Map(location=[latitude, longitude], zoom_start=13)
-        m.add_child(folium.LatLngPopup())
-        map_data = st_folium(m, width=700, height=400)
+        try:
+            geoAPIKey = st.secrets(["openGateAPIKey "])
+            gmaps = OpenCageGeocode(key =geoAPIKey)
+            m = folium.Map(location=[latitude, longitude], zoom_start=13)
+            m.add_child(folium.LatLngPopup())
+            map_data = st_folium(m, width=700, height=400)
+        except:
+            st.write('Error Connecting to Map Provider')
+        
         # Check if a location was clicked
         if map_data and map_data['last_clicked']:
             clicked_lat = map_data['last_clicked']['lat']
@@ -147,7 +145,6 @@ with st.container(border=True):
                     out4.write(f"**Zip Code:** {postal_code}")
             else:
                 st.write("No address found for the given coordinates.")
-
 
 with open('Columns.json', 'r') as file:
             columns = json.load(file)

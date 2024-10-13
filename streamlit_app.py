@@ -78,7 +78,16 @@ header {visibility: hidden;}
 st.markdown(hide_st_style, unsafe_allow_html= True)
 
 geolocator = Nominatim(user_agent="myGeocoder")
-gmaps = OpenCageGeocode(key ='7b37abbcc56646cc85e561da7e137a8c')
+
+try:
+    geoAPIKey = st.secrets(["openGateAPIKey "])
+except:
+    st.write('Error Connecting to Map Provider')
+try:
+    gmaps = OpenCageGeocode(key =geoAPIKey)
+except:
+    st.write('Error Connecting to Map Provider')
+
 latitude, longitude = 37.7749, -122.4194  # San Francisco
 
 with st.container(border=True):

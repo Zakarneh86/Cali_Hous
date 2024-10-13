@@ -94,7 +94,8 @@ with st.container(border=True):
         out3.write(f"**Street:**")
         out4.write(f"**Zip Code:**")
     
-    with st.container(border=True, height =410 ):
+    with st.container(border=True, height =410):
+        map_data =[]
         try:
             geoAPIKey = st.secrets(["openGateAPIKey "])
             gmaps = OpenCageGeocode(key =geoAPIKey)

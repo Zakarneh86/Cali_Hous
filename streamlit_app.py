@@ -143,7 +143,7 @@ with st.sidebar:
         bathRooms = st.slider('How Many Bathrooms', min_value=1, max_value=15, key=7)
 
     with st.container():  # container2
-        col1, col2, col3, col4= st.columns(5)
+        col1, col2, col3, col4= st.columns(4)
         with col1:
             hasParking = st.radio('Parking', options=['Yes', 'No'], horizontal=False, key=8)
         with col2:

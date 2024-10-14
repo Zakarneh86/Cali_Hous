@@ -145,11 +145,11 @@ with st.sidebar:
     with st.container():  # container2
         col1, col2, col3, col4, col5 = st.columns(5)
         with col1:
-            hasParking = st.radio('Parking', options=['Yes', 'No'], horizontal=True, key=8)
+            hasParking = st.radio('Parking', options=['Yes', 'No'], horizontal=False, key=8)
         with col2:
             hasGarage = st.radio('Garage', options=['Yes', 'No'], horizontal=True, key=9)
         with col3:
-            hasPool = st.radio('Pool', options=['Yes', 'No'], horizontal=True, key=10)
+            hasPool = st.radio('Pool', options=['Yes', 'No'], horizontal=False, key=10)
         with col4:
             hasSpa = st.radio('Spa', options=['Yes', 'No'], horizontal=True, key=11)
 

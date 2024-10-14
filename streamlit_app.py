@@ -165,6 +165,7 @@ dataEncoded = False
 #Fitch Data from Web Page
 if button:
     df, dataReady = dataPrep(homeType, level, yearBuilt,city, postal_code, livingArea, bedRooms, bathRooms, hasParking, hasGarage, hasPool, hasSpa, datePosting)
+    print (df.head())
 
 #Encode Data
 if dataReady:

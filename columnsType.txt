@@ -1,20 +1,15 @@
-homeType        DropDownMenue
-levels          DropDownMenue
-yearBuilt       Slide
+homeType        DropDownMenue (String: Single Family, Condo, Multi Family & Townhouse)
+levels          DropDownMenue (String: 0, 1, 2, 3, 3+)
+yearBuilt       Slide (Int: 1850 to Now)
 Age             Calculated from yearBuilt
-ageCat          Calculated from yearBuilt
-county          From Map
+ageCat          Calculated from yearBuilt (String: VO, O, MA, RN, N)
 city            Frop Map
-streetAddress   From Map
 zipcode         From Map
-livingAreaValue Slide
-bathrooms       Slide
-bedrooms        Slide
-parking         Radio
-hasGarage       Radio
-pool            Radio
-spa             Radio
-hasPetsAllowed  Radio
-postingmonth    Calander
-postingSeason   Calculated from posting Month
-
+livingAreaValue Slide (Int: 100 to 6000 Sqrft)
+bathrooms       Slide (Int: 1 to 15)
+bedrooms        Slide (Int: 1 to 15)
+parking         Radio (Bool: 0, 1)
+hasGarage       Radio (Bool: 0, 1)
+pool            Radio (Bool: 0, 1)
+spa             Radio (Bool: 0, 1)
+postingSeason   Calculated from posting Month from calander ()

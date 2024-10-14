@@ -1,5 +1,5 @@
 {
-    "HomeType": ["Single Family", "Condo", "Townhouse"],
+    "HomeType": ["Single Family", "Condo", "Townhouse", "Multi Family"],
     "Levels": ["0", "1","2","3","3+"],
     "City": ["Acampo","Acton","Adelanto","Adin","Agoura","Agoura Hills","Agua Dulce","Ahwahnee","Alameda",
     "Alamo","Albany","Albion","Alderpoint","Alhambra","Aliso Viejo","Alpaugh","Alpine","Alta","Alta Loma",

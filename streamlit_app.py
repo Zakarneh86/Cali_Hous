@@ -147,11 +147,11 @@ with st.sidebar:
         with col1:
             hasParking = st.radio('Parking', options=['Yes', 'No'], horizontal=False, key=8)
         with col2:
-            hasGarage = st.radio('Garage', options=['Yes', 'No'], horizontal=True, key=9)
+            hasGarage = st.radio('Garage', options=['Yes', 'No'], horizontal=False, key=9)
         with col3:
             hasPool = st.radio('Pool', options=['Yes', 'No'], horizontal=False, key=10)
         with col4:
-            hasSpa = st.radio('Spa', options=['Yes', 'No'], horizontal=True, key=11)
+            hasSpa = st.radio('Spa', options=['Yes', 'No'], horizontal=False, key=11)
 
     with st.container():  # container3
         datePosting = st.date_input('When to Buy', value=datetime.datetime.now(), key=12)

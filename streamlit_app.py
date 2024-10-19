@@ -69,7 +69,6 @@ def dataPrep(homeType, level, yearBuilt, city, postal_code, livingArea, bedrooms
     return df, True
 
 
-st.title('California Housing Price Evaluation')
 hide_st_style = """
 <style>
 #MainMenue {visibility: hidden;}
@@ -85,6 +84,7 @@ geolocator = Nominatim(user_agent="myGeocoder")
 latitude, longitude = 37.7749, -122.4194  # San Francisco
 
 with tab1:
+    st.title('California Housing Price Evaluation')
     with st.container(border=True):
         st.title("Select Location")
         # Create a map centered around the starting point

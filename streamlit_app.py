@@ -169,7 +169,7 @@ with tab2:
                 This is the #6 Collaborative Project of the [Super Data Science](https://www.superdatascience.com) community.
             """)
     with col2:
-        st.image('web-app/davron_web_app/SDS logo 2.jpg', width=100)
+        #st.image('web-app/davron_web_app/SDS logo 2.jpg', width=100)
         st.divider()
         st.subheader('Project leader:')
         st.write('🇺🇸 [Syed-Imtiaz Mir](https://www.linkedin.com/in/syed-imtiaz-mir/)')

@@ -175,11 +175,11 @@ with tab2:
         st.write(':flag-us: [Syed-Imtiaz Mir](https://www.linkedin.com/in/syed-imtiaz-mir/)')
         st.divider()
         st.subheader('Project mentor:')
-        st.markdown('🇦🇪 [Shaheer Airaj Ahmed](https://www.linkedin.com/in/shaheerairaj/)')
+        st.markdown(':flag-ae: [Shaheer Airaj Ahmed](https://www.linkedin.com/in/shaheerairaj/)')
         st.divider()
         st.subheader('Project members:')
         st.markdown(':flag-jo: [Mohammad M Zakarneh](https://www.linkedin.com/in/mohamed-zakarneh/)')
-        st.markdown('🇺🇿 [Davron Abdukhakimov](https://www.linkedin.com/in/davron-abdukhakimov-90aab4264/)')
+        st.markdown(':flag-🇺🇿: [Davron Abdukhakimov](https://www.linkedin.com/in/davron-abdukhakimov-90aab4264/)')
         #st.markdown('🇦🇺 Soumya Tamhankar')
         #st.markdown('🇺🇸 [Amos Anzele](https://www.linkedin.com/in/aanzele/)')
 

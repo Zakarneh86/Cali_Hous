@@ -179,7 +179,7 @@ with tab2:
         st.divider()
         st.subheader('Project members:')
         st.markdown('🇯🇴 [Mohammad M Zakarneh](https://www.linkedin.com/in/mohamed-zakarneh/)', unsafe_allow_html= True)
-        st.markdown(':flag-🇺🇿: [Davron Abdukhakimov](https://www.linkedin.com/in/davron-abdukhakimov-90aab4264/)', unsafe_allow_html= True)
+        st.markdown('🇺🇿 [Davron Abdukhakimov](https://www.linkedin.com/in/davron-abdukhakimov-90aab4264/)', unsafe_allow_html= True)
         #st.markdown('🇦🇺 Soumya Tamhankar')
         #st.markdown('🇺🇸 [Amos Anzele](https://www.linkedin.com/in/aanzele/)')
 

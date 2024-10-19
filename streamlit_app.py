@@ -10,6 +10,9 @@ from streamlit_folium import st_folium
 from geopy.geocoders import Nominatim
 from opencage.geocoder import OpenCageGeocode
 
+tab1, tab2 = st.tabs(["Main", "Credits"])
+
+
 apiKeys = st.secrets["API_Keys"]
 
 def dataPrep(homeType, level, yearBuilt, city, postal_code, livingArea, bedrooms, bathrooms, hasParking, hasGarage, hasPool, hasSpa, datePosting):
@@ -82,81 +85,104 @@ geolocator = Nominatim(user_agent="myGeocoder")
 
 latitude, longitude = 37.7749, -122.4194  # San Francisco
 
-with st.container(border=True):
-    st.title("Select Location")
-    # Create a map centered around the starting point
+with tab1:
     with st.container(border=True):
-        out1 = st.empty()
-        out2 = st.empty()
-        out1.write(f"**City:**")
-        out2.write(f"**Zip Code:**")
-    
-    with st.container(border=True, height =410):
-        map_data =[]
-        try:
-            geoAPIKey = apiKeys["openGate"]
-            gmaps = OpenCageGeocode(key =geoAPIKey)
-            m = folium.Map(location=[latitude, longitude], zoom_start=13)
-            m.add_child(folium.LatLngPopup())
-            map_data = st_folium(m, width=700, height=400)
-        except Exception as e:
-            print (e)
-            st.write('Error Connecting to Map Provider')
+        st.title("Select Location")
+        # Create a map centered around the starting point
+        with st.container(border=True):
+            out1 = st.empty()
+            out2 = st.empty()
+            out1.write(f"**City:**")
+            out2.write(f"**Zip Code:**")
         
-        # Check if a location was clicked
-        if map_data and map_data['last_clicked']:
-            clicked_lat = map_data['last_clicked']['lat']
-            clicked_lng = map_data['last_clicked']['lng']
+        with st.container(border=True, height =410):
+            map_data =[]
+            try:
+                geoAPIKey = apiKeys["openGate"]
+                gmaps = OpenCageGeocode(key =geoAPIKey)
+                m = folium.Map(location=[latitude, longitude], zoom_start=13)
+                m.add_child(folium.LatLngPopup())
+                map_data = st_folium(m, width=700, height=400)
+            except Exception as e:
+                print (e)
+                st.write('Error Connecting to Map Provider')
+            
+            # Check if a location was clicked
+            if map_data and map_data['last_clicked']:
+                clicked_lat = map_data['last_clicked']['lat']
+                clicked_lng = map_data['last_clicked']['lng']
 
-            # Perform reverse geocoding using Google Maps API
-            reverse_geocode_result = gmaps.reverse_geocode(clicked_lat, clicked_lng)
+                # Perform reverse geocoding using Google Maps API
+                reverse_geocode_result = gmaps.reverse_geocode(clicked_lat, clicked_lng)
 
-            if reverse_geocode_result:
-                # Get formatted address from the first result
-                components = reverse_geocode_result[0]['components']
+                if reverse_geocode_result:
+                    # Get formatted address from the first result
+                    components = reverse_geocode_result[0]['components']
 
-                # Extract more detailed information (city, street, zip, etc.)
-                # Extract the city
-                city = components.get('city', 'N/A')
-                if city!='N/A':
-                    out1.write(f"**City:** {city}")
+                    # Extract more detailed information (city, street, zip, etc.)
+                    # Extract the city
+                    city = components.get('city', 'N/A')
+                    if city!='N/A':
+                        out1.write(f"**City:** {city}")
 
-                # Extract the postal code
-                postal_code = components.get('postcode', 'N/A')
-                if postal_code:
-                    out2.write(f"**Zip Code:** {postal_code}")
-            else:
-                st.write("No address found for the given coordinates.")
+                    # Extract the postal code
+                    postal_code = components.get('postcode', 'N/A')
+                    if postal_code:
+                        out2.write(f"**Zip Code:** {postal_code}")
+                else:
+                    st.write("No address found for the given coordinates.")
 
-with open('Columns.json', 'r') as file:
-            columns = json.load(file)
-levelsList = columns["Levels"]
-homeTypeList = columns["HomeType"]
+    with open('Columns.json', 'r') as file:
+                columns = json.load(file)
+    levelsList = columns["Levels"]
+    homeTypeList = columns["HomeType"]
 
-with st.sidebar:
-    with st.container():  # container1
-        homeType = st.selectbox(label='Select Home Type', options=homeTypeList, key=1)
-        level = st.selectbox('Select Number of Stories', options=levelsList, key=3)
-        yearBuilt = st.select_slider('Select Year Built', options=range(1850, (datetime.datetime.now().year + 1)), key=4)
-        livingArea = st.slider('Select Living Area', min_value=100, max_value=6000, step=10, key=5)
-        bedRooms = st.slider('How Many Bedrooms', min_value=1, max_value=15, key=6)
-        bathRooms = st.slider('How Many Bathrooms', min_value=1, max_value=15, key=7)
+    with st.sidebar:
+        with st.container():  # container1
+            homeType = st.selectbox(label='Select Home Type', options=homeTypeList, key=1)
+            level = st.selectbox('Select Number of Stories', options=levelsList, key=3)
+            yearBuilt = st.select_slider('Select Year Built', options=range(1850, (datetime.datetime.now().year + 1)), key=4)
+            livingArea = st.slider('Select Living Area', min_value=100, max_value=6000, step=10, key=5)
+            bedRooms = st.slider('How Many Bedrooms', min_value=1, max_value=15, key=6)
+            bathRooms = st.slider('How Many Bathrooms', min_value=1, max_value=15, key=7)
 
-    with st.container():  # container2
-        col1, col2, col3, col4= st.columns(4)
-        with col1:
-            hasParking = st.radio('Parking', options=['Yes', 'No'], horizontal=False, key=8)
-        with col2:
-            hasGarage = st.radio('Garage', options=['Yes', 'No'], horizontal=False, key=9)
-        with col3:
-            hasPool = st.radio('Pool', options=['Yes', 'No'], horizontal=False, key=10)
-        with col4:
-            hasSpa = st.radio('Spa', options=['Yes', 'No'], horizontal=False, key=11)
+        with st.container():  # container2
+            col1, col2, col3, col4= st.columns(4)
+            with col1:
+                hasParking = st.radio('Parking', options=['Yes', 'No'], horizontal=False, key=8)
+            with col2:
+                hasGarage = st.radio('Garage', options=['Yes', 'No'], horizontal=False, key=9)
+            with col3:
+                hasPool = st.radio('Pool', options=['Yes', 'No'], horizontal=False, key=10)
+            with col4:
+                hasSpa = st.radio('Spa', options=['Yes', 'No'], horizontal=False, key=11)
 
-    with st.container():  # container3
-        datePosting = st.date_input('When to Buy', value=datetime.datetime.now(), key=12)
-        button = st.button('Predict', key=13)
-        predicted = st.empty()
+        with st.container():  # container3
+            datePosting = st.date_input('When to Buy', value=datetime.datetime.now(), key=12)
+            button = st.button('Predict', key=13)
+            predicted = st.empty()
+
+with tab2:
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("""
+                This is the #6 Collaborative Project of the [Super Data Science](https://www.superdatascience.com) community.
+            """)
+    with col2:
+        st.image('web-app/davron_web_app/SDS logo 2.jpg', width=100)
+    st.divider()
+    st.subheader('Project leader:')
+    st.write('🇺🇸 [Syed-Imtiaz Mir](https://www.linkedin.com/in/syed-imtiaz-mir/)')
+    st.divider()
+    st.subheader('Project mentor:')
+    st.markdown('🇦🇪 [Shaheer Airaj Ahmed](https://www.linkedin.com/in/shaheerairaj/)')
+    st.divider()
+    st.subheader('Project members:')
+    st.markdown('🇯🇴 [Mohammad M Zakarneh](https://www.linkedin.com/in/mohamed-zakarneh/)')
+    st.markdown('🇺🇿 [Davron Abdukhakimov](https://www.linkedin.com/in/davron-abdukhakimov-90aab4264/)')
+    #st.markdown('🇦🇺 Soumya Tamhankar')
+    #st.markdown('🇺🇸 [Amos Anzele](https://www.linkedin.com/in/aanzele/)')
+
 
 model = ModelDep.Model()
 dataReady = False

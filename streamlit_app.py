@@ -166,7 +166,7 @@ with tab2:
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("""
-                This is the #6 Collaborative Project of the [Super Data Science](https://www.superdatascience.com) community.
+                This is Collaborative Project#6 of the [Super Data Science](https://www.superdatascience.com) community.
             """)
     with col2:
         #st.image('web-app/davron_web_app/SDS logo 2.jpg', width=100)

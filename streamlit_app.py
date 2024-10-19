@@ -69,7 +69,7 @@ def dataPrep(homeType, level, yearBuilt, city, postal_code, livingArea, bedrooms
     return df, True
 
 
-#st.title('California Housing Price Evaluation', )
+st.title('California Housing Price Evaluation')
 hide_st_style = """
 <h1 style='text-align: center; color: black;'>California Housing Price Evaluation</h1>
 <style>

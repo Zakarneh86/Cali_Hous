@@ -162,6 +162,7 @@ with tab1:
             predicted = st.empty()
 
 with tab2:
+    st.title('California Housing Price Evaluation')
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("""
